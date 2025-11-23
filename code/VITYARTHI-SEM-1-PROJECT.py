@@ -112,7 +112,7 @@ def show_attendance(sheet):
             print(row)
     else:
         try:
-            student_id = int(id_input)
+            student_id = int(id_)
         except ValueError:
             print("Invalid ID.")
             return
