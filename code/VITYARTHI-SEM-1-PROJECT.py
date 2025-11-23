@@ -4,9 +4,9 @@ from datetime import datetime
 EXCEL_FILE_PATH = "C:\\Users\\siddh\\OneDrive\\Desktop\\attendance (3).xlsx"
 
 def load_attendance_workbook(path):
-    """
-    Load the Excel workbook; if it doesn't exist, create a new one with headers.
-    """
+    
+    #Load the Excel workbook; if it doesn't exist, create a new one with headers.
+    
     try:
         workbook = openpyxl.load_workbook(path)
         sheet = workbook.active
@@ -18,17 +18,17 @@ def load_attendance_workbook(path):
     return workbook, sheet
 
 def save_attendance_workbook(workbook, path):
-    """
-    Save the workbook to the specified path.
-    """
+    
+    #Save the workbook to the specified path.
+    
     workbook.save(path)
     print(f"Attendance data saved to {path}.")
 
 def add_student(sheet):
-    """
-    Prompt for a new student name and ID, then append to the sheet.
-    Prevent duplicate IDs.
-    """
+    
+    #Prompt for a new student name and ID, then append to the sheet.
+    #Prevent duplicate IDs.
+    
     name = input("Enter student name: ")
     # Loop until a valid integer ID is entered
     while True:
@@ -50,19 +50,19 @@ def add_student(sheet):
     print(f"Student {name} (ID: {student_id}) added.")
 
 def find_date_column(sheet, date_str):
-    """
-    Find the column index for the given date header, or return None if not found.
-    Date columns start from column 3 onward.
-    """
+    
+    #Find the column index for the given date header, or return None if not found.
+    #Date columns start from column 3 onward.
+    
     for col in range(3, sheet.max_column + 1):
         if sheet.cell(row=1, column=col).value == date_str:
             return col
     return None
 
 def add_date_column(sheet, date_str):
-    """
-    Add a new date column with header `date_str`, and fill existing rows with blank.
-    """
+    
+    #Add a new date column with header `date_str`, and fill existing rows with blank.
+    
     col = sheet.max_column + 1
     sheet.cell(row=1, column=col).value = date_str
     for row in range(2, sheet.max_row + 1):
@@ -70,9 +70,9 @@ def add_date_column(sheet, date_str):
     return col
 
 def record_attendance(sheet):
-    """
-    Prompt for a date, student ID, and status (Present/Absent), then record it.
-    """
+    
+    #Prompt for a date, student ID, and status (Present/Absent), then record it.
+    
     date_input = input("Enter date (YYYY-MM-DD): ")
     try:
         date_obj = datetime.strptime(date_input, "%Y-%m-%d").date()
@@ -102,11 +102,11 @@ def record_attendance(sheet):
     print("Student ID not found.")
 
 def show_attendance(sheet):
-    """
-    Display attendance. If an ID is given, show only that row; otherwise show all.
-    """
-    id_input = input("Enter student ID to view attendance (or leave blank for all): ")
-    if id_input == "":
+    
+    #Display attendance. If an ID is given, show only that row; otherwise show all.
+    
+    id_ = input("Enter student ID to view attendance (or leave blank for all): ")
+    if id_ == "":
         # Print all rows (including header)
         for row in sheet.iter_rows(values_only=True):
             print(row)
